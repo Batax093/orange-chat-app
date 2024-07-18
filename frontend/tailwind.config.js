@@ -3,13 +3,10 @@
 import daisyui from 'daisyui'
 
 export default {
-  content: ["./src/**/*.{html,js,jsx}"],
+  content: ["./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
     extend: {},
   },
   plugins: [ daisyui ],
-  resolve: {
-    extensions: ['.js', '.jsx', '.ts', '.tsx'],
-  }
 }
 

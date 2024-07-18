@@ -10,8 +10,8 @@ const Message = () => {
         </div>
       </div>
       <div>
-        <div className="chat-bubble chat-bubble-primary">What kind of nonsense is this</div>
-        <div className="chat-footer opacity-50">Delivered</div>
+        <div className="chat-bubble chat-bubble-primary bg-amber-500">What kind of nonsense is this</div>
+        <div className="chat-footer opacity-50 text-sm text-black">Delivered</div>
       </div>
     </div>
   );

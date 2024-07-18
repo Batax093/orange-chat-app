@@ -12,8 +12,8 @@ const SearchInput = () => {
       />
       <button
         type="submit"
-        className="btn btn-primary">
-        <FiSearch className="w-5 h-5 outline-none" />
+        className="btn btn-circle bg-orange-500 hover:bg-amber-600 text-black ">
+        <FiSearch className="w-5 h-5" />
       </button>
     </form>
   );
