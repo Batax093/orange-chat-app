@@ -8,5 +8,8 @@ export default {
     extend: {},
   },
   plugins: [ daisyui ],
+  resolve: {
+    extensions: ['.js', '.jsx', '.ts', '.tsx'],
+  }
 }
 
