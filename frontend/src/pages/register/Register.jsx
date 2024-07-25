@@ -1,6 +1,29 @@
+import { Link } from "react-router-dom";
+import { useState } from "react";
 import GenderCheckBox from "./GenderCheckBox";
+import useRegister from "../../hooks/useRegister";
 
 const Register = () => {
+  const [ inputs, setInputs ] = useState({
+    fullName: '',
+    username: '',
+    password: '',
+    confirmPassword: '',
+    gender: '',
+  })
+
+  const { loading, register } = useRegister();
+
+  const handleCheckBoxChange = (gender) => {
+    setInputs({ ...inputs, gender})
+  }
+
+  const handleSubmit = async(e) => {
+    e.preventDefault()
+
+    await register(inputs);
+  }
+
   return (
     <div className="flex flex-col items-center justify-center min-w-96 mx-auto">
       <div className="w-full p-6 rounded-lg shadow-md bg-white bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-50 border border-gray-200">
@@ -11,7 +34,7 @@ const Register = () => {
 
         <form
           className="space-y-4"
-          action="">
+          onSubmit={handleSubmit}>
           <div>
             <span className="text-base label-text text-gray-700">Full Name</span>
             <label className="input input-bordered flex items-center gap-2">
@@ -26,6 +49,8 @@ const Register = () => {
                 type="text"
                 className="grow w-full h-10 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500"
                 placeholder="John Doe"
+                value={inputs.fullName}
+                onChange={e => setInputs({ ...inputs, fullName: e.target.value })}
               />
             </label>
           </div>
@@ -43,6 +68,8 @@ const Register = () => {
                 type="text"
                 className="grow w-full h-10 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500"
                 placeholder="Enter Username"
+                value={inputs.username}
+                onChange={e => setInputs({ ...inputs, username: e.target.value })}
               />
             </label>
           </div>
@@ -64,6 +91,8 @@ const Register = () => {
                 type="password"
                 className="grow w-full h-10 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500"
                 placeholder="Enter Password"
+                value={inputs.password}
+                onChange={e => setInputs({ ...inputs, password: e.target.value })}
               />
             </label>
           </div>
@@ -85,19 +114,20 @@ const Register = () => {
                 type="password"
                 className="grow w-full h-10 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500"
                 placeholder="Confirm Password"
+                value={inputs.confirmPassword}
+                onChange={e => setInputs({ ...inputs, confirmPassword: e.target.value })}
               />
             </label>
           </div>
 
-          <GenderCheckBox />
+          <GenderCheckBox onCheckBoxChange = {handleCheckBoxChange} selectedGender = { inputs.gender } />
 
-          <a
-            href="#"
+          <Link to="/login"
             className="text-sm text-gray-700 hover:underline hover:text-orange-500 mt-2 inline-block">
             Already have an account?
-          </a>
+          </Link>
           <div>
-            <button className="btn btn-primary w-full bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded text-sm">Register</button>
+            <button className="btn btn-primary w-full bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded text-sm" disabled={loading}>Register</button>
           </div>
         </form>
       </div>
