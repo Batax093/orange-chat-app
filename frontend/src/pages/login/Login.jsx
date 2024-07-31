@@ -1,6 +1,18 @@
 import { Link } from "react-router-dom";
+import useLogin from "../../hooks/useLogin";
+import { useState } from "react";
 
 const Login = () => {
+  const { login, loading } = useLogin();
+
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleLogin = async(e) => {
+    e.preventDefault();
+    await login(username, password);
+  }
+
   return (
     <div className="flex flex-col items-center justify-center min-w-96 mx-auto">
       <div className="w-full p-6 rounded-lg shadow-md bg-white bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-50 border border-gray-200">
@@ -9,7 +21,7 @@ const Login = () => {
           <span className="text-3xl font-bold leading-tight tracking-tight text-orange-500"> ChatApp</span>
         </h1>
 
-        <form className="space-y-4" action="">
+        <form className="space-y-4" onSubmit={handleLogin}>
           <div>
             <span className="text-base label-text text-gray-700">Username</span>
             <label className="input input-bordered flex items-center gap-2">
@@ -24,6 +36,8 @@ const Login = () => {
                 type="text"
                 className="grow w-full h-10 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500"
                 placeholder="Enter Username"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
               />
             </label>
           </div>
@@ -45,12 +59,16 @@ const Login = () => {
                 type="password"
                 className="grow w-full h-10 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500"
                 placeholder="Enter Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
               />
             </label>
           </div>
           <Link to = "/register" className="text-sm text-gray-700 hover:underline hover:text-orange-500 mt-2 inline-block">{"Don't"} have an account?</Link>
           <div>
-            <button className="btn btn-primary w-full bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded text-sm">Login</button>
+            <button disabled={loading} className="btn btn-primary w-full bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded text-sm">
+              {loading ? <span className="loading loading-spinner"></span> : "Login"}
+            </button>
           </div>
         </form>
       </div>

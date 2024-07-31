@@ -1,15 +1,14 @@
+import axios from "axios";
 import { useState } from "react";
 import { useAuthContext } from "../context/AuthContext";
 import toast from "react-hot-toast";
-import axios from "axios";
 
-const useRegister = () => {
+const useLogin = () => {
   const [loading, setLoading] = useState(false);
-
   const { setAuthUser } = useAuthContext();
 
-  const register = async (fullName, username, password, confirmPassword, gender) => {
-    const success = handleInputErrors(fullName, username, password, confirmPassword, gender);
+  const login = async (username, password) => {
+    const success = handleInputErrors(username, password);
 
     if (!success) return;
 
@@ -17,13 +16,10 @@ const useRegister = () => {
 
     try {
       const res = await axios.post(
-        "/api/auth/register",
+        "/api/auth/login",
         {
-          fullName,
           username,
           password,
-          confirmPassword,
-          gender,
         },
         {
           headers: {
@@ -31,7 +27,8 @@ const useRegister = () => {
           },
         }
       );
-      const data = res.data;
+
+      const data = await res.data;
       if (data.error) {
         throw new Error(data.error);
       }
@@ -45,24 +42,14 @@ const useRegister = () => {
     }
   };
 
-  return { register, loading };
+  return { login, loading };
 };
 
-export default useRegister;
+export default useLogin;
 
-function handleInputErrors(fullName, username, password, confirmPassword, gender) {
-  if (!fullName || !username || !password || !confirmPassword || !gender) {
+function handleInputErrors(username, password) {
+  if (!username || !password) {
     toast.error("All fields are required");
-    return false;
-  }
-
-  if (password !== confirmPassword) {
-    toast.error("Passwords do not match");
-    return false;
-  }
-
-  if (password.length < 6) {
-    toast.error("Password must be at least 6 characters");
     return false;
   }
 
