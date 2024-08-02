@@ -40,7 +40,7 @@ const SearchInput = () => {
       <button
         type="submit"
         className="btn btn-circle bg-orange-500 hover:bg-amber-600 text-black">
-        <FiSearch className="w-5 h-5" />
+        <FiSearch className="w-6 h-6" />
       </button>
     </form>
   );

@@ -9,8 +9,8 @@ const Messages = () => {
   useEffect(() => {
     setTimeout(() => {
       lastMessageRef.current?.scrollIntoView({ behavior: "smooth" });
-    }, 100)
-  })
+    }, 100);
+  });
 
   return (
     <div className="px-4 flex-1 overflow-auto">
@@ -18,6 +18,7 @@ const Messages = () => {
         messages.length > 0 &&
         messages.map((message) => (
           <div
+            className="py-2"
             key={message._id}
             ref={lastMessageRef}>
             <Message message={message} />
