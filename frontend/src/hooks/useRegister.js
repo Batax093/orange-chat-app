@@ -8,8 +8,8 @@ const useRegister = () => {
 
   const { setAuthUser } = useAuthContext();
 
-  const register = async (fullName, username, password, confirmPassword, gender) => {
-    const success = handleInputErrors(fullName, username, password, confirmPassword, gender);
+  const register = async ({fullName, username, password, confirmPassword, gender}) => {
+    const success = handleInputErrors({fullName, username, password, confirmPassword, gender});
 
     if (!success) return;
 
@@ -50,7 +50,7 @@ const useRegister = () => {
 
 export default useRegister;
 
-function handleInputErrors(fullName, username, password, confirmPassword, gender) {
+function handleInputErrors({fullName, username, password, confirmPassword, gender}) {
   if (!fullName || !username || !password || !confirmPassword || !gender) {
     toast.error("All fields are required");
     return false;
