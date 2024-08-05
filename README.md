@@ -16,7 +16,7 @@ Setelah login, pengguna akan melihat daftar kontak di sebelah kiri dengan foto p
 
 ## Teknologi yang Digunakan
 
-- **Frontend**: React, Bootstrap, SCSS
+- **Frontend**: React, Tailwind
 - **Backend**: Node.js, Express
 - **Realtime**: Socket.io
 - **Database**: MongoDB
