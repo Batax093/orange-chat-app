@@ -50,8 +50,3 @@ Setelah login, pengguna akan melihat daftar kontak di sebelah kiri dengan foto p
    ```sh
    cd ../frontend
    npm start
-
-## Lisensi
-Proyek ini dilisensikan di bawah MIT License - lihat file LICENSE untuk detail lebih lanjut.
-
-Anda bisa menyesuaikan URL repository dan detail lainnya sesuai kebutuhan proyek Anda.
